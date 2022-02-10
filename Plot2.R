@@ -1,0 +1,8 @@
+setwd("~/Documents/Swapnil/Data_Science/R_Projects/Exploratory Data Analysis/week1")
+install.packages("sqldf")
+library(sqldf)
+input_df <- read.csv.sql("household_power_consumption.txt","select * from file where Date = '1/2/2007' or Date = '2/2/2007' ",sep=";")
+input_df$datetime <- strptime(paste(input_df$Date, input_df$Time), format = "%d/%m/%Y %H:%M:%S")
+png(filename = "plot2.png", width = 480, height = 480)
+plot(input_df$datetime, input_df$Global_active_power, type = "l", xlab = "", ylab = "Global Active Power(killowatts)")
+dev.off()
